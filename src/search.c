@@ -3,5 +3,6 @@
 
 bool search(int a[], int n, int x)
 {
+    
     return 0;
 }
