@@ -10,18 +10,34 @@
 
 void DFT (node * root)
 {
-	// Implement DFS
+	// Recursive implement DFS
 	// Hint: You can use print_node, print_tree and/or print_stack.
+  //pre: root must point to atleast 1 rchild or lchild.
+  //post: prints all children of tree, going as far left as possible first, then goes right and then left again if possible.
+  if(root!=NULL)
+  {
+    printf("\n");
+    print_node(root); //prints current root
+    printf("\n");
+    DFT(root->lchild);//prints all lchildren until root=NULL
+    DFT(root->rchild);//prints all rchildren until root=NULL, going back 
+  }
+
 }
 
 node *make_node (int num, node * left, node * right)
 {
-	return 0;
+  node *element =malloc(sizeof(node));
+  element->lchild=left;
+  element->rchild=right;
+  element->num=num;
+  element->visited=false;
+	return element;
 }
 
 void free_node (node * p)
 {
-	
+	free(p);
 }
 
 
@@ -58,17 +74,25 @@ void print_tree (node * p, int depth)
 
 stack *push (stack * topp, node * node)
 {
+  stack *element=malloc(sizeof(stack));
+  element->node=node;
+  element->next=topp;
+  topp=element;
 	return 0;
 }
 
 bool isEmpty (stack * topp)
 {
+  if(topp->next==NULL)
+  {
+    return true;
+  }
   return false;
 }
 
 node *top (stack * topp)
 {
-	return 0;
+	return topp->node;
 }
 
 // Utility function to pop topp  
@@ -76,7 +100,9 @@ node *top (stack * topp)
 
 stack *pop (stack * topp)
 {
-	return 0;
+  topp=topp->next;
+  return topp;
+	
 }
 
 void print_stack (stack * topp)
